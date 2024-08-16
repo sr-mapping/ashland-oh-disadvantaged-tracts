@@ -35,11 +35,12 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="data/AshlandCountyCensusTracts_1.js"></script>
+        <script src="data/Ashlandcityboundary_1.js"></script>
+        <script src="data/AshlandCountyCensusTracts_2.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:17, minZoom:1
-        }).fitBounds([[40.35083962951156,-83.3172756297586],[41.2900588787481,-81.27798520968764]]);
+        }).fitBounds([[40.73840033669136,-82.65867554872531],[41.06965424902933,-81.93854615528369]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -121,7 +122,94 @@
         });
         layer_OSMStandard_0;
         map.addLayer(layer_OSMStandard_0);
-        function pop_AshlandCountyCensusTracts_1(feature, layer) {
+        function pop_Ashlandcityboundary_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATEFP'] !== null ? autolinker.link(feature.properties['STATEFP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PLACEFP'] !== null ? autolinker.link(feature.properties['PLACEFP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PLACENS'] !== null ? autolinker.link(feature.properties['PLACENS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GEOID'] !== null ? autolinker.link(feature.properties['GEOID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GEOIDFQ'] !== null ? autolinker.link(feature.properties['GEOIDFQ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAMELSAD'] !== null ? autolinker.link(feature.properties['NAMELSAD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LSAD'] !== null ? autolinker.link(feature.properties['LSAD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CLASSFP'] !== null ? autolinker.link(feature.properties['CLASSFP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PCICBSA'] !== null ? autolinker.link(feature.properties['PCICBSA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MTFCC'] !== null ? autolinker.link(feature.properties['MTFCC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FUNCSTAT'] !== null ? autolinker.link(feature.properties['FUNCSTAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ALAND'] !== null ? autolinker.link(feature.properties['ALAND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AWATER'] !== null ? autolinker.link(feature.properties['AWATER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTPTLAT'] !== null ? autolinker.link(feature.properties['INTPTLAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTPTLON'] !== null ? autolinker.link(feature.properties['INTPTLON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Ashlandcityboundary_1_0() {
+            return {
+                pane: 'pane_Ashlandcityboundary_1',
+                opacity: 1,
+                color: 'rgba(83,83,83,1.0)',
+                dashArray: '10.0,2.0',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(83,83,83,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Ashlandcityboundary_1');
+        map.getPane('pane_Ashlandcityboundary_1').style.zIndex = 401;
+        map.getPane('pane_Ashlandcityboundary_1').style['mix-blend-mode'] = 'normal';
+        var layer_Ashlandcityboundary_1 = new L.geoJson(json_Ashlandcityboundary_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Ashlandcityboundary_1',
+            layerName: 'layer_Ashlandcityboundary_1',
+            pane: 'pane_Ashlandcityboundary_1',
+            onEachFeature: pop_Ashlandcityboundary_1,
+            style: style_Ashlandcityboundary_1_0,
+        });
+        bounds_group.addLayer(layer_Ashlandcityboundary_1);
+        map.addLayer(layer_Ashlandcityboundary_1);
+        function pop_AshlandCountyCensusTracts_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Tract</th>\
@@ -155,11 +243,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_AshlandCountyCensusTracts_1_0(feature) {
+        function style_AshlandCountyCensusTracts_2_0(feature) {
             switch(String(feature.properties['SN_C'])) {
                 case '1':
                     return {
-                pane: 'pane_AshlandCountyCensusTracts_1',
+                pane: 'pane_AshlandCountyCensusTracts_2',
                 opacity: 1,
                 color: 'rgba(77,77,255,1.0)',
                 dashArray: '',
@@ -174,7 +262,7 @@
                     break;
                 case '0':
                     return {
-                pane: 'pane_AshlandCountyCensusTracts_1',
+                pane: 'pane_AshlandCountyCensusTracts_2',
                 opacity: 1,
                 color: 'rgba(77,77,255,1.0)',
                 dashArray: '',
@@ -189,20 +277,20 @@
                     break;
             }
         }
-        map.createPane('pane_AshlandCountyCensusTracts_1');
-        map.getPane('pane_AshlandCountyCensusTracts_1').style.zIndex = 401;
-        map.getPane('pane_AshlandCountyCensusTracts_1').style['mix-blend-mode'] = 'normal';
-        var layer_AshlandCountyCensusTracts_1 = new L.geoJson(json_AshlandCountyCensusTracts_1, {
+        map.createPane('pane_AshlandCountyCensusTracts_2');
+        map.getPane('pane_AshlandCountyCensusTracts_2').style.zIndex = 402;
+        map.getPane('pane_AshlandCountyCensusTracts_2').style['mix-blend-mode'] = 'normal';
+        var layer_AshlandCountyCensusTracts_2 = new L.geoJson(json_AshlandCountyCensusTracts_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_AshlandCountyCensusTracts_1',
-            layerName: 'layer_AshlandCountyCensusTracts_1',
-            pane: 'pane_AshlandCountyCensusTracts_1',
-            onEachFeature: pop_AshlandCountyCensusTracts_1,
-            style: style_AshlandCountyCensusTracts_1_0,
+            dataVar: 'json_AshlandCountyCensusTracts_2',
+            layerName: 'layer_AshlandCountyCensusTracts_2',
+            pane: 'pane_AshlandCountyCensusTracts_2',
+            onEachFeature: pop_AshlandCountyCensusTracts_2,
+            style: style_AshlandCountyCensusTracts_2_0,
         });
-        bounds_group.addLayer(layer_AshlandCountyCensusTracts_1);
-        map.addLayer(layer_AshlandCountyCensusTracts_1);
+        bounds_group.addLayer(layer_AshlandCountyCensusTracts_2);
+        map.addLayer(layer_AshlandCountyCensusTracts_2);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -215,7 +303,8 @@
         .title += 'Search for a place';
         var baseMaps = {};
         var overlaysTree = [
-            {label: 'Ashland County Census Tracts<br /><table><tr><td style="text-align: center;"><img src="legend/AshlandCountyCensusTracts_1_IdentifiedasDisadvantagedYES0.png" /></td><td>Identified as Disadvantaged: YES</td></tr><tr><td style="text-align: center;"><img src="legend/AshlandCountyCensusTracts_1_IdentifiedasDisadvantagedNO1.png" /></td><td>Identified as Disadvantaged: NO</td></tr></table>', layer: layer_AshlandCountyCensusTracts_1},
+            {label: 'Ashland County Census Tracts<br /><table><tr><td style="text-align: center;"><img src="legend/AshlandCountyCensusTracts_2_IdentifiedasDisadvantagedYES0.png" /></td><td>Identified as Disadvantaged: YES</td></tr><tr><td style="text-align: center;"><img src="legend/AshlandCountyCensusTracts_2_IdentifiedasDisadvantagedNO1.png" /></td><td>Identified as Disadvantaged: NO</td></tr></table>', layer: layer_AshlandCountyCensusTracts_2},
+            {label: '<img src="legend/Ashlandcityboundary_1.png" /> Ashland city boundary', layer: layer_Ashlandcityboundary_1},
             {label: "OSM Standard", layer: layer_OSMStandard_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
